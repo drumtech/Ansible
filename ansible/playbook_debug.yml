@@ -1,0 +1,14 @@
+---
+ - name: Debug book
+   hosts: all
+   become: true
+
+   tasks:
+   - debug:
+       var: size
+   - debug:
+       var: ansible_distribution
+   - shell: uptime
+     register: results
+   - debug:
+       var: results.stdout

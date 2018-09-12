@@ -1,0 +1,34 @@
+---
+# tasks file for deploy_web_servers
+- name: Add repo
+  yum_repository :
+     name:
+      epel
+     description:
+      EPEL yum repo
+     file:
+      external_repos
+     baseurl:
+      https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+     gpgcheck:
+      no
+  tags: add_repo_nginx
+
+- name: Install Nginx
+  yum:
+     name: nginx
+     state: latest
+  tags: nginx_install
+
+- name: Start and boot Nginx
+  systemd:
+     name: nginx
+     state: started
+     enabled: yes
+  tags: start_nginx
+
+- name: Change Nginx port
+  template: src=nginx.j2 dest={{ dst_fol }}/nginx.conf mode=0555
+  notify:
+     - Restart Nginx
+  tags: restart_nginx

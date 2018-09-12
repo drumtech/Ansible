@@ -1,0 +1,7 @@
+---
+# handlers file for deploy_web_servers
+- name: Restart Nginx
+  systemd:
+    name: nginx
+    state: reloaded
+  tags: restart_nginx

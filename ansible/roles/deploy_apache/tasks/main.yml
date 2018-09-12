@@ -1,0 +1,16 @@
+---
+# tasks file for deploy_apache
+- name: Install Apache
+  yum:
+    name: httpd
+    state: latest
+
+  tags: apache_install
+
+- name: Start and boot Apache
+  systemd:
+     name: httpd
+     state: started
+     enabled: yes
+  tags: apache_start
+

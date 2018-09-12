@@ -1,0 +1,13 @@
+---
+- name: Install Apache & Nginx
+
+  hosts: APACHE_SERVERS
+  become: yes
+
+  roles:
+    - deploy_apache
+
+- hosts: NGINX_SERVERS
+  become: true
+  roles:
+    - deploy_web_servers

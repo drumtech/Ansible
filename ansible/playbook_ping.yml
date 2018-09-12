@@ -1,0 +1,10 @@
+
+# playbook.yml
+---
+- name: Otus Nginx and Apache
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Ping my servers
+    ping:
